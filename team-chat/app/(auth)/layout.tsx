@@ -1,10 +1,4 @@
-import React, { ReactNode } from 'react';
-
-type Props = {
-  children: ReactNode;
-};
-
-const AuthLayout = ({ children }: Props) => {
+const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="h-full flex items-center justify-center">{children}</div>
   );
