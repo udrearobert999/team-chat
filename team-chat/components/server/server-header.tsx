@@ -37,6 +37,7 @@ const ServerHeader = ({ server, role }: ServerHeaderProps) => {
   const handleManageMembers = () => onOpen('members', { server });
   const handleCreateChannel = () => onOpen('createChannel', { server });
   const handleLeaveServer = () => onOpen('leaveServer', { server });
+  const handleDeleteServer = () => onOpen('deleteServer', { server });
 
   return (
     <DropdownMenu>
@@ -94,7 +95,10 @@ const ServerHeader = ({ server, role }: ServerHeaderProps) => {
         )}
         {isModerator && <DropdownMenuSeparator />}
         {isAdmin && (
-          <DropdownMenuItem className="text-rose-500 px-3 py-2 text-sm cursor-pointer">
+          <DropdownMenuItem
+            onClick={handleDeleteServer}
+            className="text-rose-500 px-3 py-2 text-sm cursor-pointer"
+          >
             Delete Server
             <Trash className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
