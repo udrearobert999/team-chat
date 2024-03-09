@@ -37,19 +37,19 @@ const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
   const textChannels = server?.channels.filter(
     (channel) => channel.type === ChannelType.TEXT
   );
-  const videoChannels = server?.channels.filter(
-    (channel) => channel.type === ChannelType.VIDEO
-  );
   const audioChannels = server?.channels.filter(
     (channel) => channel.type === ChannelType.AUDIO
   );
-
-  // filter ourselves out
+  const videoChannels = server?.channels.filter(
+    (channel) => channel.type === ChannelType.VIDEO
+  );
   const members = server?.members.filter(
     (member) => member.profileId !== profile.id
   );
 
-  if (!server) return redirect('/');
+  if (!server) {
+    return redirect('/');
+  }
 
   const role = server.members.find(
     (member) => member.profileId === profile.id
