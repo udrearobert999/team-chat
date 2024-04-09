@@ -1,7 +1,8 @@
-import { currentProfile } from '@/lib/current-profile';
-import { db } from '@/lib/db';
-import { redirectToSignIn } from '@clerk/nextjs';
-import { redirect } from 'next/navigation';
+import { redirectToSignIn } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
+
+import { currentProfile } from "@/lib/current-profile";
+import { db } from "@/lib/db";
 
 interface ServerIdPageProps {
   params: {
@@ -28,10 +29,10 @@ const ServerIdPage = async ({ params }: ServerIdPageProps) => {
     include: {
       channels: {
         where: {
-          name: 'general',
+          name: "general",
         },
         orderBy: {
-          createdAt: 'asc',
+          createdAt: "asc",
         },
       },
     },
@@ -39,7 +40,9 @@ const ServerIdPage = async ({ params }: ServerIdPageProps) => {
 
   const initialChannel = server?.channels[0];
 
-  if (initialChannel?.name !== 'general') return null;
+  if (initialChannel?.name !== "general") {
+    return null;
+  }
 
   return redirect(`/servers/${params.serverId}/channels/${initialChannel?.id}`);
 };
