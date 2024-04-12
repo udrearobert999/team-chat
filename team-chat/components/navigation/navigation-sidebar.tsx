@@ -1,21 +1,22 @@
-import { redirect } from 'next/navigation';
+import { redirect } from "next/navigation";
 
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
-import { ModeToggle } from '@/components/mode-toggle';
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { ModeToggle } from "@/components/mode-toggle";
+import { ShopButton } from "@/components/shop/shop-button";
 
-import { currentProfile } from '@/lib/current-profile';
-import { db } from '@/lib/db';
+import { currentProfile } from "@/lib/current-profile";
+import { db } from "@/lib/db";
 
-import { NavigationAction } from './navigation-action';
-import { NavigationItem } from './navigation-item';
+import { NavigationAction } from "./navigation-action";
+import { NavigationItem } from "./navigation-item";
 
-import { UserButton } from '@clerk/nextjs';
+import { UserButton } from "@clerk/nextjs";
 
 const NavigationSidebar = async () => {
   const profile = await currentProfile();
 
-  if (!profile) return redirect('/');
+  if (!profile) return redirect("/");
 
   const servers = await db.server.findMany({
     where: {
@@ -39,11 +40,12 @@ const NavigationSidebar = async () => {
         ))}
       </ScrollArea>
       <div className="pb-3 mt-auto flex items-center flex-col gap-y-4">
+        <ShopButton />
         <ModeToggle />
         <UserButton
           afterSignOutUrl="/"
           appearance={{
-            elements: { avatarBox: 'h-[48px] w-[48px]' },
+            elements: { avatarBox: "h-[48px] w-[48px]" },
           }}
         />
       </div>
