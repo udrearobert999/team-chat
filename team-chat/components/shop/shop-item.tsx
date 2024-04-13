@@ -10,16 +10,25 @@ import {
 import { Button } from "@/components/ui/button";
 
 import Image from "next/image";
+
 import { ShoppingCartIcon } from "lucide-react";
 
+import { ShopItemModel } from "@/types";
+import { useCart } from "@/hooks/use-cart-store";
+
 interface ShopItemProps {
-  id: string;
-  title: string;
-  imageUrl: string;
-  price: number;
+  itemModel: ShopItemModel;
 }
 
-export const ShopItem = ({ title, imageUrl, price }: ShopItemProps) => {
+export const ShopItem = ({ itemModel }: ShopItemProps) => {
+  const { title, imageUrl, price } = itemModel;
+
+  const { addItem } = useCart();
+
+  const handleAddToCart = () => {
+    addItem(itemModel);
+  };
+
   return (
     <Card className="shadow-lg border-none flex flex-col items-center justify-center w-72 h-96 p-2 bg-zinc-200/90 dark:bg-zinc-700/75 text-zinc-500 dark:text-zinc-400">
       <CardHeader className="">{title}</CardHeader>
@@ -31,7 +40,10 @@ export const ShopItem = ({ title, imageUrl, price }: ShopItemProps) => {
         </div>
       </CardContent>
       <CardFooter className="py-4">
-        <Button className="space-x-2 dark:bg-zinc-800/35 dark:text-zinc-400 bg-zinc-400/35 text-zinc-500">
+        <Button
+          onClick={handleAddToCart}
+          className="space-x-2 dark:bg-zinc-800/35 dark:text-zinc-400 bg-zinc-400/35 text-zinc-500"
+        >
           <ShoppingCartIcon />
           <span>{price}$</span>
         </Button>

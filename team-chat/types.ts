@@ -14,3 +14,10 @@ export type NextApiResponseServerIO = NextApiResponse & {
     };
   };
 };
+
+export type ShopItemModel = {
+  id: string;
+  title: string;
+  imageUrl: string;
+  price: number;
+};

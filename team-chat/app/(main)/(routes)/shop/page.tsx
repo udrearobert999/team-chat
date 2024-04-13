@@ -3,17 +3,12 @@
 import { ShopCartButton } from "@/components/shop/shop-cart-button";
 import { ShopItem } from "@/components/shop/shop-item";
 import { ShopSearch } from "@/components/shop/shop-search";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { ShoppingCart } from "lucide-react";
+import { ShopItemModel } from "@/types";
+
 import { useEffect, useState } from "react";
 
-const shopItems: {
-  id: string;
-  title: string;
-  imageUrl: string;
-  price: number;
-}[] = [
+const shopItems: ShopItemModel[] = [
   {
     id: "29fda105-c71e-4c8c-8159-148716740c0d",
     title: "Love",
@@ -72,7 +67,6 @@ const ShopPage = () => {
   const handleSearchChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
-    console.log("da");
     setSearchQuery(event.target.value);
   };
 
@@ -91,7 +85,7 @@ const ShopPage = () => {
       <Separator className="bg-zinc-200 dark:bg-zinc-700 rounded-md my-2" />
       <div className="flex flex-wrap w-full h-full p-8 gap-6">
         {filteredItems.map((item) => (
-          <ShopItem key={item.id} {...item} />
+          <ShopItem key={item.id} itemModel={item} />
         ))}
         {!filteredItems.length && (
           <div className="h-full w-full flex justify-center font-bold text-zinc-500 dark:text-zinc-400">
