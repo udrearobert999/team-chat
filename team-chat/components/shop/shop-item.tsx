@@ -1,20 +1,22 @@
-"use client";
+'use client';
 
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
-import Image from "next/image";
+import Image from 'next/image';
 
-import { ShoppingCartIcon } from "lucide-react";
+import { ShoppingCartIcon } from 'lucide-react';
 
-import { ShopItemModel } from "@/types";
-import { useCart } from "@/hooks/use-cart-store";
+import { ShopItemModel } from '@/lib/types';
+import { useCart } from '@/hooks/use-cart-store';
+import Currency from '@/components/currency';
+import toast from 'react-hot-toast';
 
 interface ShopItemProps {
   itemModel: ShopItemModel;
@@ -27,6 +29,8 @@ export const ShopItem = ({ itemModel }: ShopItemProps) => {
 
   const handleAddToCart = () => {
     addItem(itemModel);
+
+    toast.success('Added item to cart');
   };
 
   return (
@@ -42,10 +46,10 @@ export const ShopItem = ({ itemModel }: ShopItemProps) => {
       <CardFooter className="py-4">
         <Button
           onClick={handleAddToCart}
-          className="space-x-2 dark:bg-zinc-800/35 dark:text-zinc-400 bg-zinc-400/35 text-zinc-500"
+          className="space-x-2 dark:bg-zinc-800/35 dark:text-zinc-400 bg-zinc-400/35 hover:bg-zinc-400/50 text-zinc-500 dark:hover:bg-zinc-800/50"
         >
           <ShoppingCartIcon />
-          <span>{price}$</span>
+          <Currency value={itemModel.price} />
         </Button>
       </CardFooter>
     </Card>

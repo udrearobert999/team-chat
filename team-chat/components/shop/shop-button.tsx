@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
-import { Store } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { ActionTooltip } from "../action-tooltip";
+import { Store } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { ActionTooltip } from '@/components/action-tooltip';
 
 export const ShopButton = () => {
   const router = useRouter();

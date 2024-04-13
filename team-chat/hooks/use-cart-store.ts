@@ -1,13 +1,14 @@
-import { ShopItemModel } from "@/types";
+import { ShopItemModel } from '@/lib/types';
 
-import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
 interface CartStore {
   items: ShopItemModel[];
   totalPrice: number;
   addItem: (newItem: ShopItemModel) => void;
   removeItem: (itemId: string) => void;
+  clear: () => void;
 }
 
 export const useCart = create(
@@ -40,9 +41,13 @@ export const useCart = create(
           );
           return { items: updatedItems, totalPrice: updatedTotalPrice };
         }),
+      clear: () =>
+        set((state) => {
+          return { items: [], totalPrice: 0 };
+        }),
     }),
     {
-      name: "cart-storage",
+      name: 'cart-storage',
       storage: createJSONStorage(() => localStorage),
     }
   )

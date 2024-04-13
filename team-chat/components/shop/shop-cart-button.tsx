@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
-import { ShoppingCart } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { ActionTooltip } from "../action-tooltip";
-import { useCart } from "@/hooks/use-cart-store";
+import { ShoppingCart } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { ActionTooltip } from '@/components/action-tooltip';
+import { useCart } from '@/hooks/use-cart-store';
 
 export const ShopCartButton = () => {
   const { items } = useCart();
@@ -14,11 +14,11 @@ export const ShopCartButton = () => {
   const router = useRouter();
 
   const onClick = () => {
-    router.push(`/checkout`);
+    router.push(`/cart`);
   };
 
   return (
-    <ActionTooltip label="Checkout" side="top" align="center">
+    <ActionTooltip label="Cart" side="top" align="center">
       <Button
         onClick={onClick}
         className="bg-transparent border-0 relative"
